@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <!-- bradcam_area_start -->
+    <div class="bradcam_area" style="background-image: url({% static 'img/banner/bradcam.png' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bradcam_text text-center">
+                        <h3>Forum</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- bradcam_area_end -->
+
+
+    <!--================Blog Area =================-->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="text-center"> 
+                {% if user.is_authenticated %}      
+                  <a href="{% url 'add_forum_post' %}"><button type="button" class="btn btn-danger">+</button></a>
+                {% endif %}
+              </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    {% for i in object_list%}
+                    <div class="blog_left_sidebar">
+                        <article class="blog_item">
+                            <div class="blog_details">
+                                <a class="d-inline-block" href=" {% url 'forum_detail' i.pk %}">
+                                    <h4>{{i.title}}</h4>
+                                </a>
+                                <p>
+                                {% autoescape off %}
+
+                                {{i.text|truncatewords:25}}
+                                {% endautoescape %}
+                                </p>
+                                <ul class="blog-info-link">
+                                    <li><a href="{% url 'forum_tag' i.tag %}">{{i.tag}}</a></li>
+                                    <li><a>{{i.created_date}}</a></li>
+                                    <li class="float-right"><a>{{i.author}}</a></li>
+                                </ul>
+                            </div>
+                        </article>          
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget search_widget">
+                            <form action="#">
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <form method="GET" action="{% url 'forum' %}">
+                                            <input type="text" class="form-control" placeholder=''
+                                                onfocus="this.placeholder = ''"
+                                                onblur="this.placeholder = 'Ara'" name="search">
+                                            <button class="btn" type="submit"><i class="ti-search"></i></button>
+                                        </div>
+                                    </div>
+                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Arama</button>
+                            </form>                    
+                        </aside>
+
+                        <aside class="single_sidebar_widget post_category_widget">
+                            <h4 class="widget_title">Kategoriler</h4>
+                            <ul class="list cat-list">
+                                <li>
+                                    <a href="{% url 'forum' %}" class="d-flex">
+                                        <p>Tümü</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'forum_tag' 'Genel' %}" class="d-flex">
+                                        <p>Genel</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'forum_tag' 'Kediler' %}" class="d-flex">
+                                        <p>Kediler</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'forum_tag' 'Köpekler' %}" class="d-flex">
+                                        <p>Köpekler</p>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'forum_tag' 'Balıklar' %}" class="d-flex">
+                                        <p>Balıklar</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================Blog Area =================-->
+
+{% endblock %}

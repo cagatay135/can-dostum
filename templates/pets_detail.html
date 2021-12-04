@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+   <!--================Blog Area =================-->
+   <section class="blog_area single-post-area section-padding">
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-8 posts-list">
+             <div class="single-post">
+                <div class="feature-img">
+                  {% for i in animal %}
+                   <img class="img-fluid" src="{% if i.collects.url %}
+                   {{i.collects.url}}
+                   {% else %}
+                   https://cdnuploads.aa.com.tr/uploads/Contents/2020/05/14/thumbs_b_c_88bedbc66bb57f0e884555e8250ae5f9.jpg?v=140708
+                   {% endif %}" alt="">
+                </div>
+                <div class="blog_details">
+                    <p class="text-danger font-weight-bold">Tür : {{i.collects.kind}}</p>
+                    {% if i.collects.name|length > 0 %}
+                    <p class="text-danger font-weight-bold">İsmi : {{i.collects.name}}</p>
+                    {% endif %}
+                    <p class="text-danger font-weight-bold">Cinsiyet : {{i.collects.sex}}</p>
+                    <p class="text-danger font-weight-bold">Yaş : {{i.collects.age}}</p>
+                    <p class="text-danger font-weight-bold">Konum : <ion-icon name="location-sharp"></ion-icon>  İstanbul</p> 
+                   <p >
+                     {{ i.collects.description }}
+                   </p>
+                   {% endfor %}
+
+                </div>
+             </div>
+
+          </div>
+          <div class="col-lg-4">
+             <div class="blog_right_sidebar">                        
+                <aside class="single_sidebar_widget newsletter_widget">
+                   <h4 class="widget_title">Mesaj Gönder</h4>
+                   <form action="#">
+                      <div class="form-group">
+                         <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Enter email'" placeholder='Mesajınız' required>
+                      </div>
+                      <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                         type="submit">Gönder</button>
+                   </form>
+                </aside>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <!--================ Blog Area end =================-->
+{% endblock content %}
+
+    

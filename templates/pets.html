@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <!-- bradcam_area_start -->
+    <div class="bradcam_area" style="background-image: url({% static 'img/banner/bradcam.png' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bradcam_text text-center">
+                        <h3>Hadi Can Dostumuzu Sahiplendirelim</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- bradcam_area_end -->
+
+    <!-- pet_care_area_start  -->
+    <div class="pet_care_area">
+      <div class="container">
+        <div class="text-center"> 
+          <a href="{% url 'petsfilter' 'Kedi' %}"><button type="button" class="btn">Kedi</button></a>
+          <a href="{% url 'petsfilter' 'Köpek' %}"><button type="button" class="btn">Köpek</button></a>
+          <a href="{% url 'petsfilter' 'Hamster' %}"><button type="button" class="btn">Hamster</button></a>
+          <a href="{% url 'petsfilter' 'Tavşan' %}"><button type="button" class="btn">Tavşan</button></a>
+          <a href="{% url 'petsfilter' 'Diğer' %}"><button type="button" class="btn">Diğer</button></a>
+        </div>
+        <br>
+        <div class="text-center"> 
+          {% if user.is_authenticated %}      
+            <a href="{% url 'ekle' %}"><button type="button" class="btn btn-danger">+</button></a>
+          {% endif %}
+        </div>
+        <br>
+        <div class="row">
+          
+          {% for i in snapshots %}
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <img class="card-img-top" data-src="https://cdnuploads.aa.com.tr/uploads/Contents/2020/05/14/thumbs_b_c_88bedbc66bb57f0e884555e8250ae5f9.jpg?v=140708" alt="Thumbnail [100%x225]" src="{% if i.collects.url %}
+              {{i.collects.url}}
+              {% else %}
+              https://cdnuploads.aa.com.tr/uploads/Contents/2020/05/14/thumbs_b_c_88bedbc66bb57f0e884555e8250ae5f9.jpg?v=140708
+              {% endif %}" data-holder-rendered="true" style="height: 225px; width: 100%; display: block;">
+              <div class="card-body">
+                {% if i.collects.name|length > 0 %}
+                  <p class="card-text">İsmi : {{i.collects.name}}</p>
+                {% endif %}
+                <p class="card-text">Yaşı : {{i.collects.age}}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+
+                    <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'petsdetail' id=i.collects.id %}">Ayrıntılar</a></button>
+                  </div>
+                 
+                  <medium> <ion-icon name="location-sharp"></ion-icon> {{i.collects.adress}}</medium>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- pet_care_area_end  -->
+{% endblock content %}

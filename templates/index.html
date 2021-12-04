@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+    <!-- slider_area_start -->
+    <div class="slider_area">
+        <div class="single_slider slider_bg_1 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5 col-md-6">
+                        <div class="slider_text">
+                            <h3>Bize Katıl, <br> <span>İyiliğe Takıl !</span></h3>
+                            <p> Türkiye'nin dört bir yanında,  <br> dostlarımız için bir tık uzağındaki uygulama !</p>
+                            <a href=" " class="boxed-btn4">Uygulamayı indir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dog_thumb d-none d-lg-block">
+                
+                <table>
+                    <td><a><img src="{% static 'img/banner/dog.png' %}"></a></td>
+                    <td>   <img src="{% static 'telefon.png' %}"></td>
+              </table>
+                
+                
+            </div>
+        </div>
+    </div>
+    <!-- slider_area_end -->
+
+    <!-- service_area_start  -->
+    <div class="service_area">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-lg-7 col-md-10">
+                    <div class="section_title text-center mb-95">
+                        <h3>Dünya Hepimizindir</h3>
+                        <p>Can Dostum uygulamasını indirerek kayıp ilanı verebilir, evcil hayvan sahiplenebilir veya
+                            mama bağışı yapabilirsin !
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <a href="#harita">
+                    <div class="single_service">
+                         <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
+                             <div class="service_icon">
+                                 <img src="{% static 'img/service/service_icon_1.png' %}" alt="">
+                             </div>
+                         </div>
+                         <div class="service_content text-center">
+                            <h3>Kayıp İlanı</h3>
+                            <p>Can Dostum'da kayıp dostlarımızın ilanlarını görebilir, kayıp evcil hayvanının ilanını gönderebilirsin !</p>
+                         </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <a href="{% url 'sahiplendirme' %}">
+                    <div class="single_service active">
+                         <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
+                             <div class="service_icon">
+                                 <img src="{% static 'img/service/service_icon_2.png' %}" alt="">
+                             </div>
+                         </div>
+                         <div class="service_content text-center">
+                            <h3>Sahiplenme</h3>
+                            <p>Yüzlerce ücretsiz sahiplendirme ilanlarından yeni dostunu tek tıkla bulabilirsin !</p>
+                         </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <a href="{% url 'bagis' %}">
+                    <div class="single_service">
+                         <div class="service_thumb service_icon_bg_1 d-flex align-items-center justify-content-center">
+                             <div class="service_icon">
+                                 <img src="{% static 'img/service/service_icon_3.png' %}" alt="">
+                             </div>
+                         </div>
+                         <div class="service_content text-center">
+                            <h3>Mama Bağışı</h3>
+                            <p>Can Dostum ile yardıma muhtaç dostlarımıza mama bağışı yaparak destek olabilirsiniz !</p>
+                         </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- service_area_end -->
+
+    <!-- pet_care_area_start  -->
+    
+    <!-- pet_care_area_end  -->
+
+    <!-- adapt_area_start  -->
+    <h1 align ="center">YARDIMINIZA İHTİYAÇLARI VAR</h1>
+    <div id="harita" class="adapt_area"> 
+        <div class="container">
+                <div id="googleMap" style="width:100%;height:600px;"></div>
+                    </div>
+            </div>
+
+
+
+
+<script>
+const citymap = {
+        chicago: {
+          center: { lat: 40.833720, lng: 26.659670 },
+          population: 25,
+        },}
+
+const acildegil = {
+        chicago: {
+          center: { lat: 40.854494, lng: 26.631899 },
+          population: 30,
+        },
+        chicagox: {
+          center: { lat: 40.845113, lng: 26.624193 },
+          population: 30,
+        },}
+
+function myMap() {
+
+var mapProp= {
+  center:new google.maps.LatLng(40.850436, 26.633309),
+  zoom:14,
+};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+        for (const city in citymap) {
+          // Add the circle for this city to the map.
+          const cityCircle = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: citymap[city].center,
+            radius: Math.sqrt(citymap[city].population) * 100,
+          });
+        }
+
+        for (const city in acildegil) {
+          // Add the circle for this city to the map.
+          const cityCircle = new google.maps.Circle({
+            strokeColor: "#008000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#008000",
+            fillOpacity: 0.35,
+            map,
+            center: acildegil[city].center,
+            radius: Math.sqrt(acildegil[city].population) * 100,
+          });
+        }
+
+        var icon = {
+        url: "{% static 'img/circle-cropped.png' %}", // url
+        scaledSize: new google.maps.Size(25, 25), // size
+    };
+
+const z = new google.maps.Marker({
+position: new google.maps.LatLng(40.833721,26.659670),
+map,
+title: "Hello World!",
+icon: icon,
+width:10
+});
+
+const y = new google.maps.Marker({
+position: new google.maps.LatLng(40.854494,26.631899),
+map,
+title: "Hello World!",
+icon: icon,
+width:10
+});
+
+const contentString =
+    "<p>Bendis Avm Yakınlarında Kayboldu</p>"+
+    "<p>İletişim:0542 222 ** **</p>";
+
+  const infowindow = new google.maps.InfoWindow({
+    content: contentString,
+  });
+
+  const contentStringx =
+    "<p><bold>ACİL!</bold></p>"+
+    "<p>Yarım Saat Önce Keşan Yusuf Çapraz Yüksekokulu Yakınlarında Kayboldu</p>"+
+    "<p>İletişim:0542 222 ** **</p>";
+
+  const infowindowx = new google.maps.InfoWindow({
+    content: contentStringx,
+  });
+
+  const contentStringz =
+    "<p>Keşan Çarşıda Kayboldu</p>"+
+    "<p>İletişim:0542 222 ** **</p>";
+
+  const infowindowz = new google.maps.InfoWindow({
+    content: contentStringz,
+  });
+
+const x = new google.maps.Marker({
+position: new google.maps.LatLng(40.845113,26.624193),
+map,
+title: "Hello World!",
+icon: icon,
+width:10
+});
+
+x.addListener("click", () => {
+    infowindow.open(map, x);
+  });
+
+
+
+z.addListener("click", () => {
+    infowindowx.open(map, z);
+  });
+
+
+y.addListener("click", () => {
+    infowindowz.open(map, y);
+  });
+}
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSqSPEPdVa_aEmi4YtQYE2QQQMF0VEC0Q&callback=myMap"></script>
+    
+<!-- adapt_area_end  -->
+{% endblock content %}
+   

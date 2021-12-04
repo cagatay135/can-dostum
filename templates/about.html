@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- bradcam_area_start -->
+    <div class="bradcam_area" style="background-image: url({% static 'img/banner/bradcam.png' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bradcam_text text-center">
+                        <h3>Hakkımızda</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- bradcam_area_end -->
+
+    <!-- pet_care_area_start  -->
+    <div class="pet_care_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 col-md-6">
+                    <div class="pet_thumb">
+                        <img src="{% static 'img/about/pet_care.png' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-1 col-md-6">
+                    <div class="pet_info">
+                        <div class="section_title">
+                            <img src="{% static 'img/logo.png' %}" alt="">
+                            <h3><span>Hedefimiz İçin </span> <br>
+                                Yola Çıktık</h3>
+                            <p>2020 yılında kurulan kuruluşumuz bütün toplumun yararlandığı ve yararlanacağı yurttaşlık bilincini yansıtmaktadır. Can Dostum olarak sosyal sorumluluk çalışmalarını yürütürken hayvanların hayatlarında<br>
+                                 bir iz bırakmayı ve günlük yaşamı daha iyi bir hale getirmek başlıca hedeflerimizdendir..<br>
+                                Siz de her şey insanlık ve hayvanlar için diyorsanız ;</p>
+                            <a href=" " class="boxed-btn3">Uygulamayı İndir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- pet_care_area_end  -->
+
+{% endblock content %}
